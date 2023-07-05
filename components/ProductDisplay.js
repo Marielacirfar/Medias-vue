@@ -49,8 +49,9 @@ app.component('product-display', {
             }
         },
         methods:{
+            /*recibe el evento que esta en el index para agregar unidades al carrito*/
             addToCart(){
-                this.cart +=1
+                this.$emit('add-to-cart', this.variants[this.selectdVariant].id)
             },
             updateVariant(index){
                 this.selectdVariant = index

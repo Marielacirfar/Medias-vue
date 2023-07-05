@@ -11,16 +11,17 @@
   <body>
     <div id="app">
       <div class="nav-bar">
-        <div class="cart">Cart({{ cart }})</div>
-        <product-display :premium="premium"></product-display>
+        <div class="cart">Cart({{ cart.length }})</div>
+        <!--relacionando componente product-display con @add-to-cart=... emite el evento fuera del componente-->
+        <product-display :premium="premium" @add-to-cart="updateCart"></product-display>
         
       </div>
       
     </div>
 
-    <!-- Import Js -->
+    <!-- Importando Js -->
     <script src="./main.js"></script>
-    <!--Import Components-->
+    <!--Importando Components-->
     <script src="./components/ProductDisplay.js"></script>
     ><script>
       const mountedApp= app.mount('#app')
