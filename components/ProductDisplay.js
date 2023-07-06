@@ -77,7 +77,7 @@ app.component('product-display', {
             },
             shipping(){
                 if (this.premium) {
-                    return 'Free'
+                    return 'Gratis'
                 }
                 return 2.99
             },
