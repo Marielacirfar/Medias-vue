@@ -15,9 +15,9 @@ app.component('product-display', {
             <div class="product-info">
               <h1>{{ title }}</h1>
 
-              <p v-if="inStock">In Stock</p>
-              <p v-else="inStock">Out of Stock</p>
-              <p>shipping {{shipping}}</p>
+              <p v-if="inStock">En Stock</p>
+              <p v-else="inStock">Agotado</p>
+              <p>Envío {{shipping}}</p>
               <ul>
                 <li v-for="detail in details">{{ detail }}</li>
               </ul>
@@ -32,20 +32,23 @@ app.component('product-display', {
              class="button" 
              :class="{disabledButton: !inStock}"
              :disabled="!inStock"
-             v-on:click="addToCart">Add to Cart</button>
+             v-on:click="addToCart">Agregar</button>
             </div>
           </div>
+          <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+          <review-form @review-submitted="addReview"></review-form>
         </div>`,
         data(){
             return{
-                product: 'Socks',
-                brand:'Vue Mastery',
+                product: 'Medias',
+                brand:'Las mejores',
                 selectdVariant: 0,
-                details: ['50% cotton', '30% wool', '20% polyester'],
+                details: ['50% algodón', '30% lana', '20% poliéster'],
                 variants:[
                     {id: 2234, color:'green', image: './assets/images/socks_green.jpg', quantity: 50 },
                     {id: 2235, color:'blue', image: './assets/images/socks_blue.jpg', quantity: 0 },
-                ]
+                ],
+                reviews: []
             }
         },
         methods:{
@@ -55,9 +58,12 @@ app.component('product-display', {
             },
             updateVariant(index){
                 this.selectdVariant = index
-                
-    
+
+            },
+            addReview(review){
+                this.reviews.push(review)
             }
+
         },
         computed:{
             title(){
